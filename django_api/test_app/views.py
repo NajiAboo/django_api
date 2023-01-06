@@ -1,5 +1,6 @@
 from django.http import response, JsonResponse
 from rest_framework.views import APIView
+from rest_framework import generics
 from .models import TestModel
 from .serializers import SimpleSerializer
 # Create your views here.
@@ -30,5 +31,13 @@ class Simple(APIView):
         serializer.save()
         return JsonResponse({"data": serializer.data})
         
-        
+
+
+class SimpleGenerics(generics.ListCreateAPIView):
+    queryset = TestModel.objects.all()
+    serializer_class = SimpleSerializer
     
+class SimpleGenericsUpdate(generics.UpdateAPIView):
+    queryset = TestModel.objects.all()
+    serializer_class = SimpleSerializer
+    lookup_field = "id"
