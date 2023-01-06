@@ -11,7 +11,7 @@ class TestModel(models.Model):
     amount = models.FloatField()
     extra_name = models.CharField(max_length=250, editable=False, default="null")
     created_at =models.DateTimeField(default=timezone.now)
-    update_at = models.DateField(default=timezone.now)
+    update_at = models.DateTimeField(default=timezone.now)
     
     def __str__(self) -> str:
         return f" {self.name}"
