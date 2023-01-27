@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from test_app.views import Simple, SimpleGenerics, SimpleGenericsUpdate
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from test_app.views import Simple, SimpleGenerics, SimpleGenericsUpdate, SimpleViewSet
+
+simple_router = DefaultRouter()
+simple_router.register("simple-viewset", SimpleViewSet)
 
 
 urlpatterns = [
@@ -23,5 +27,6 @@ urlpatterns = [
     path('simple/', Simple.as_view()),
     path('simple/<int:id>', Simple.as_view()),
     path('simple-generics', SimpleGenerics.as_view()),
-    path('simple-generics/<int:id>', SimpleGenericsUpdate.as_view())
+    path('simple-generics/<int:id>', SimpleGenericsUpdate.as_view()),
+    path("",include(simple_router.urls))
 ]

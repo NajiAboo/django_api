@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from .models import TestModel
 from .serializers import SimpleSerializer
+from rest_framework.viewsets import ModelViewSet
 # Create your views here.
 
 class Simple(APIView):
@@ -41,3 +42,8 @@ class SimpleGenericsUpdate(generics.UpdateAPIView):
     queryset = TestModel.objects.all()
     serializer_class = SimpleSerializer
     lookup_field = "id"
+
+class SimpleViewSet(ModelViewSet):
+    queryset = TestModel.objects.all()
+    serializer_class = SimpleSerializer
+    
